@@ -33,4 +33,20 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, speed);
         }
     }
+
+    // player interacts with fire power up
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "PowerUp")
+        {
+            Destroy(collision.gameObject);
+            GetComponent <SpriteRenderer>().color = Color.red;
+            canAttack();
+        }
+    }
+
+   public void canAttack()
+    {
+        
+    }
 }
