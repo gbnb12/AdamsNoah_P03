@@ -43,5 +43,10 @@ public class Player : MonoBehaviour
             GetComponent <SpriteRenderer>().color = Color.red;
             
         }
+        if (collision.tag == "Enemy")
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+        }
     }
 }

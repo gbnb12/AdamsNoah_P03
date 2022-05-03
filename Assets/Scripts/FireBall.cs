@@ -25,9 +25,19 @@ public class FireBall : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D collision)
     {
-        hit = true;
-        circleCollider.enabled = false;
-        animator.SetTrigger("explode");
+        if (collision.tag == "Enemy")
+        {
+            hit = true;
+            circleCollider.enabled = false;
+            animator.SetTrigger("explode");
+        }
+        if (collision.tag == "Obstacle")
+        {
+            hit = true;
+            circleCollider.enabled = false;
+            animator.SetTrigger("explode");
+        }
+        
     }
 
     public void SetDirection(float _direction)
@@ -39,7 +49,7 @@ public class FireBall : MonoBehaviour
 
         float localScaleX = transform.localScale.x;
         if (Mathf.Sign(localScaleX) != _direction)
-            localScaleX = localScaleX;
+            //localScaleX = localScaleX;
 
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
