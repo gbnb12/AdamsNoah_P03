@@ -13,6 +13,8 @@ public class FireBallAttack : MonoBehaviour
     private Animator animator;
     private Player player;
 
+    static public bool canFireball = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -21,7 +23,7 @@ public class FireBallAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown)
+        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown )
         {
             Attack();
             
@@ -30,13 +32,16 @@ public class FireBallAttack : MonoBehaviour
       
     }
    
-    private void Attack()
+    public void Attack()
     {
-        animator.SetTrigger("attack");
-        cooldownTimer = 0;
+        if (canFireball == true)
+        {
+            animator.SetTrigger("attack");
+            cooldownTimer = 0;
 
-        fireballs[FindFireball()].transform.position = firePoint.position;
-        fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
+            fireballs[FindFireball()].transform.position = firePoint.position;
+            fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
+        }
     }
 
     private int FindFireball()
@@ -50,5 +55,21 @@ public class FireBallAttack : MonoBehaviour
             
         }
         return 0;
+    }
+
+    // player interacts with fire power up
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "PowerUp")
+        {
+            Destroy(collision.gameObject);
+            GetComponent<SpriteRenderer>().color = Color.red;
+            FireBallAttack.canFireball = true;
+        }
+        if (collision.tag == "Enemy")
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+            FireBallAttack.canFireball = false;
+        }
     }
 }

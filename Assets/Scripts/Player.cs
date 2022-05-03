@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D body;
     [SerializeField] private float speed;
+    
 
     private void Awake()
     {
@@ -34,19 +35,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    // player interacts with fire power up
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "PowerUp")
-        {
-            Destroy(collision.gameObject);
-            GetComponent <SpriteRenderer>().color = Color.red;
-            
-        }
-        if (collision.tag == "Enemy")
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
-
-        }
-    }
+    
 }
