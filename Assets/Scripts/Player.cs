@@ -41,12 +41,7 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GetComponent <SpriteRenderer>().color = Color.red;
-            canAttack();
+            
         }
-    }
-
-   public void canAttack()
-    {
-        
     }
 }
