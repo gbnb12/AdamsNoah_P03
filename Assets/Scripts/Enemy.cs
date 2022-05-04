@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "FireBall")
@@ -12,4 +14,5 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

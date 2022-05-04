@@ -12,6 +12,9 @@ public class FireBallAttack : MonoBehaviour
     private float cooldownTimer = Mathf.Infinity;
     private Animator animator;
     private Player player;
+    public AudioSource fireballThrowingSound;
+    public AudioSource playerHitsEnemySound;
+    public AudioSource powerupSound;
 
     static public bool canFireball = false;
 
@@ -27,6 +30,7 @@ public class FireBallAttack : MonoBehaviour
         {
             Attack();
             
+            
         }
         cooldownTimer += Time.deltaTime;
       
@@ -41,6 +45,7 @@ public class FireBallAttack : MonoBehaviour
 
             fireballs[FindFireball()].transform.position = firePoint.position;
             fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
+            fireballThrowingSound.Play();
         }
     }
 
@@ -65,11 +70,13 @@ public class FireBallAttack : MonoBehaviour
             Destroy(collision.gameObject);
             GetComponent<SpriteRenderer>().color = Color.red;
             FireBallAttack.canFireball = true;
+            powerupSound.Play();
         }
         if (collision.tag == "Enemy")
         {
             GetComponent<SpriteRenderer>().color = Color.white;
             FireBallAttack.canFireball = false;
+            playerHitsEnemySound.Play();
         }
     }
 }

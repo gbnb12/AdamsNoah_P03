@@ -9,6 +9,8 @@ public class FireBall : MonoBehaviour
     private bool hit;
     private Animator animator;
     private CircleCollider2D circleCollider;
+    public AudioSource hitEnemySound;
+    public AudioSource hitObstacleSound;
 
     private void Awake()
     {
@@ -30,12 +32,14 @@ public class FireBall : MonoBehaviour
             hit = true;
             circleCollider.enabled = false;
             animator.SetTrigger("explode");
+            hitEnemySound.Play();
         }
         if (collision.tag == "Obstacle")
         {
             hit = true;
             circleCollider.enabled = false;
             animator.SetTrigger("explode");
+            hitObstacleSound.Play();
         }
         
     }
