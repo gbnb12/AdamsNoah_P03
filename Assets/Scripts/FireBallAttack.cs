@@ -28,12 +28,9 @@ public class FireBallAttack : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown )
         {
-            Attack();
-            
-            
+            Attack(); 
         }
         cooldownTimer += Time.deltaTime;
-      
     }
    
     public void Attack()
